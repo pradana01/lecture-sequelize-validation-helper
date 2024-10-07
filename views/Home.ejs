@@ -10,7 +10,7 @@
 
     <form action="/newItem" method="post">
         <label for="productName">Product Name</label>
-        <input type="text" name="productName" id="productName">
+        <input type="text" name="productName" id="productName" required>
         <br>
         <label for="price">Price</label>
         <input type="number" name="price" id="price">
@@ -24,21 +24,23 @@
         <input type="submit" value="submit">
     </form>
 
-    <table>
+    <table border="10">
         <tr>
             <th>ID</th>
             <th>Product Name</th>
             <th>Price</th>
             <th>Description</th>
             <th>Quantity</th>
+            <th>Production Date</th>
         </tr>
         <% items.forEach(item => { %>
             <tr>
                 <td><%= item.id %></td>
                 <td><%= item.productName %></td>
-                <td><%= item.priceInCurrency %></td>
+                <td><%= item.formattedPrice %></td>
                 <td><%= item.description %></td>
                 <td><%= item.quantity %></td>
+                <td><%= dateFormat(item.createdAt) %></td>
             </tr>
         <% }) %>
     </table>
