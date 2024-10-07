@@ -1,0 +1,82 @@
+Validation: -> contohkan pemberian error message yang customize
+1. Not empty 
+    firstName: {
+        type: DataTypes.STRING,
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: "First Name cannot be empty"
+            }
+        }
+    }
+2. Is email
+    email: {
+        type: DataTypes.STRING,
+        validate: {
+            isEmail: {
+                msg: "First Name cannot be empty"
+            }
+        }
+    }
+3. Allow null & not null
+    firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: "First Name cannot be empty"
+            },
+            notNull: {
+                msg: "All data must be sent"
+            }
+        }
+    }
+4. Show multiple errors
+    if (error.name === "SequelizeValidationError") {
+        let errors = error.errors.map(e => e.message);
+        res.send(errors);
+    } else {
+        res.send(error)
+    }
+5. Custom Validation
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+          notEmpty: {
+              args: true,
+              msg: "First Name cannot be empty"
+          },
+          notNull: {
+              msg: "All data must be sent"
+          },
+          containsA(value) {
+            let flag = false;
+            for (let i = 0; i < value.length; i++) {
+              if (value[i].toLowerCase() === "a") {
+                flag = true
+              }
+            }
+            if (!flag) {
+              throw new Error("Must have letter a")
+            }
+          }
+      }
+    }
+6. Helper -> function
+
+
+
+Validation:
+1. Contohkan validasi database dengan allowNull false pada migration
+2. notEmpty
+3. allowNull & notNull
+4. len -> check length
+5. notContains
+6. min -> on price and quantity
+7. Custom Validation
+
+Helper:
+1. create getter to format price
+2. create helper to modularize the algorithm
